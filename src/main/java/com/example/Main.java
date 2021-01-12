@@ -11,8 +11,11 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
+        //initializing allies and final output
         int allies = 0;
+        String outputMessage = "";
 
+        //initializing southeros and adding kingdoms
         Southeros southeros = new Southeros();
         southeros.addKingdom("space", "gorilla");
         southeros.addKingdom("land", "panda");
@@ -21,21 +24,28 @@ public class Main {
         southeros.addKingdom("air", "owl");
         southeros.addKingdom("fire", "dragon");
 
-        List<String> allLines = Files.readAllLines(Paths.get("/home/anubhavj19/Anubhav/geektrust/src/main/resources/test.txt"));
+        //Taking file path input on command line
+        List<String> allLines = Files.readAllLines(Paths.get(args[0]));
+
+        //initializing cipher class object
         SeasarCipher cipherObject = new SeasarCipher();
-        String outputMessage = "";
 
-        for (String line : allLines) {
-            String kingdomName = line.split(" ")[0];
-            String emblem = southeros.getEmblem(kingdomName.toLowerCase());
+        //looping each line of the file
+        try {
+            for (String line : allLines) {
+                String kingdomName = line.split(" ")[0];
+                String emblem = southeros.getEmblem(kingdomName.toLowerCase());
 
-            String message = line.substring(kingdomName.length() + 1);
-            String decryptedMessage = cipherObject.decryptMessage(message, emblem.length());
+                String message = line.substring(kingdomName.length() + 1);
+                String decryptedMessage = cipherObject.decryptMessage(message, emblem.length());
 
-            if (secretMessageIdentified(decryptedMessage.toLowerCase(), emblem.toLowerCase())) {
-                allies++;
-                outputMessage += kingdomName + " ";
+                if (secretMessageIdentified(decryptedMessage.toLowerCase(), emblem.toLowerCase())) {
+                    allies++;
+                    outputMessage += kingdomName + " ";
+                }
             }
+        } catch (Exception ex) {
+            System.out.println("Incorrect input.");
         }
 
         if (allies >= 3) {
