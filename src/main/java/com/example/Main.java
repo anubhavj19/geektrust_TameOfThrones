@@ -25,23 +25,26 @@ public class Main {
         southeros.addKingdom("fire", "dragon");
 
         //Taking file path input on command line
-        List<String> allLines = Files.readAllLines(Paths.get(args[0]));
+        //List<String> allLines = Files.readAllLines(Paths.get(args[0]));
+        List<String> allLines = Files.readAllLines(Paths.get("/home/anubhavj19/Anubhav/geektrust/src/main/resources/test.txt"));
 
         //initializing cipher class object
         SeasarCipher cipherObject = new SeasarCipher();
 
-        //looping each line of the file
+        //looping each line of the input file
         try {
             for (String line : allLines) {
                 String kingdomName = line.split(" ")[0];
-                String emblem = southeros.getEmblem(kingdomName.toLowerCase());
 
-                String message = line.substring(kingdomName.length() + 1);
-                String decryptedMessage = cipherObject.decryptMessage(message, emblem.length());
+                if (southeros.kingdomExists(kingdomName.toLowerCase())) {
+                    String emblem = southeros.getEmblem(kingdomName.toLowerCase());
+                    String message = line.substring(kingdomName.length() + 1);
+                    String decryptedMessage = cipherObject.decryptMessage(message, emblem.length());
 
-                if (secretMessageIdentified(decryptedMessage.toLowerCase(), emblem.toLowerCase())) {
-                    allies++;
-                    outputMessage += kingdomName + " ";
+                    if (secretMessageIdentified(decryptedMessage.toLowerCase(), emblem.toLowerCase())) {
+                        allies++;
+                        outputMessage += kingdomName + " ";
+                    }
                 }
             }
         } catch (Exception ex) {
@@ -59,6 +62,7 @@ public class Main {
 
         HashMap<Character, Integer> hashmap = new HashMap<>();
 
+        //hashmap to store characters of emblem and their count
         for (char ch : emblem.toCharArray()) {
             if (!hashmap.containsKey(ch)) {
                 hashmap.put(ch, 1);
@@ -68,6 +72,7 @@ public class Main {
             }
         }
 
+        //iterating characters in text and subtracting 1 from value if character matches in emblem
         for (char ch : text.toCharArray()) {
             if (hashmap.containsKey(ch)) {
                 int count = hashmap.get(ch);
@@ -75,6 +80,7 @@ public class Main {
             }
         }
 
+        //checking if the resulting hashmap has value > 0 for any character
         for (int value : hashmap.values()) {
             if (value > 0) {
                 return false;
