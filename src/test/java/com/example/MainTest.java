@@ -8,6 +8,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class MainTest {
 
     @Test
+    void noKingdomsInSoutherosReturnsException() {
+        Southeros southeros = new Southeros();
+        Kingdom kingdom = southeros.getKingdom("air");
+    }
+
+    @Test
     void secretMessageIdentifiedTest() {
     //testing incorrect message
 

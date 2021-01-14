@@ -6,6 +6,7 @@ public class Kingdom {
     private String emblem;
 
     public Kingdom(String name, String emblem) {
+        this.name = name;
         this.emblem = emblem;
     }
 

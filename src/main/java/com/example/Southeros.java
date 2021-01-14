@@ -7,23 +7,23 @@ import java.util.Map;
 
 public class Southeros {
 
-    private Map<String, String> kingdoms= new HashMap<>();
+    private Map<String, Kingdom> kingdoms;
+
+    public Southeros() {
+        kingdoms = new HashMap<>();
+    }
 
     public void addKingdom(String kingdomName, String kingdomEmblem) {
         if (!kingdoms.containsKey(kingdomName)) {
-            kingdoms.put(kingdomName, kingdomEmblem);
+            kingdoms.put(kingdomName, new Kingdom(kingdomName, kingdomEmblem));
         }
-    }
-
-    public String getEmblem(String kingdomName) {
-        return kingdoms.get(kingdomName);
     }
 
     public boolean kingdomExists(String kingdomName) {
-        if (kingdoms.containsKey(kingdomName)) {
-            return true;
-        }
+        return(kingdoms.containsKey(kingdomName));
+    }
 
-        return false;
+    public Kingdom getKingdom(String kingdomName) {
+        return kingdoms.get(kingdomName);
     }
 }

@@ -11,10 +11,6 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        //initializing allies and final output
-        int allies = 0;
-        String outputMessage = "";
-
         //initializing southeros and adding kingdoms
         Southeros southeros = new Southeros();
         southeros.addKingdom("space", "gorilla");
@@ -24,26 +20,43 @@ public class Main {
         southeros.addKingdom("air", "owl");
         southeros.addKingdom("fire", "dragon");
 
+        System.out.println(getAllies(southeros, "/home/anubhavj19/Anubhav/geektrust/src/main/resources/test.txt"));
+        //"/home/anubhavj19/Anubhav/geektrust/src/main/resources/test.txt"
+    }
+
+    public static String getAllies(Southeros southeros, String filePath) throws IOException {
+        //initializing allies and final output
+        int allies = 0;
+        String successMessage = "";
+        String failureMessage = "NONE";
+
         //Taking file path input on command line
         //List<String> allLines = Files.readAllLines(Paths.get(args[0]));
-        List<String> allLines = Files.readAllLines(Paths.get("/home/anubhavj19/Anubhav/geektrust/src/main/resources/test.txt"));
+        List<String> allLines = Files.readAllLines(Paths.get(filePath));
 
         //initializing cipher class object
-        SeasarCipher cipherObject = new SeasarCipher();
+        SeasarCipher cipherObject;
 
         //looping each line of the input file
         try {
             for (String line : allLines) {
                 String kingdomName = line.split(" ")[0];
 
+                //check if kingdom exists in Southeros
                 if (southeros.kingdomExists(kingdomName.toLowerCase())) {
-                    String emblem = southeros.getEmblem(kingdomName.toLowerCase());
+                    String emblem = southeros.getKingdom(kingdomName.toLowerCase()).getEmblem();
+                    cipherObject = new SeasarCipher(emblem.length());
+
                     String message = line.substring(kingdomName.length() + 1);
-                    String decryptedMessage = cipherObject.decryptMessage(message, emblem.length());
+                    String decryptedMessage = cipherObject.decryptMessage(message);
 
                     if (secretMessageIdentified(decryptedMessage.toLowerCase(), emblem.toLowerCase())) {
                         allies++;
-                        outputMessage += kingdomName + " ";
+                        successMessage += kingdomName + " ";
+                    }
+
+                    if (allies >= 3) {
+                        return "SPACE " + successMessage;
                     }
                 }
             }
@@ -51,11 +64,7 @@ public class Main {
             System.out.println("Incorrect input.");
         }
 
-        if (allies >= 3) {
-            System.out.println("SPACE " + outputMessage);
-        } else {
-            System.out.println("NONE");
-        }
+        return failureMessage;
     }
 
     public static boolean secretMessageIdentified(String text, String emblem) {

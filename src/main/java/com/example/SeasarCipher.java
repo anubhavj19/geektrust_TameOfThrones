@@ -12,7 +12,11 @@ public class SeasarCipher {
         this.key = key;
     }
 
-    public String encryptMessage(String message, int key) {
+    public SeasarCipher(int key) {
+        this.key = key;
+    }
+
+    public String encryptMessage(String message) {
 
         StringBuffer result = new StringBuffer();
 
@@ -33,7 +37,7 @@ public class SeasarCipher {
         return result.toString();
     }
 
-    public String decryptMessage(String message, int key) {
+    public String decryptMessage(String message) {
 
         StringBuffer result = new StringBuffer();
         key = 26 - key;
