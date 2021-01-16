@@ -38,31 +38,31 @@ public class Main {
         SeasarCipher cipherObject;
 
         //looping each line of the input file
-        try {
             for (String line : allLines) {
                 String kingdomName = line.split(" ")[0];
 
-                //check if kingdom exists in Southeros
-                if (southeros.kingdomExists(kingdomName.toLowerCase())) {
-                    String emblem = southeros.getKingdom(kingdomName.toLowerCase()).getEmblem();
-                    cipherObject = new SeasarCipher(emblem.length());
+                try {
+                    //check if kingdom exists in Southeros
+                    if (southeros.kingdomExists(kingdomName.toLowerCase())) {
+                        String emblem = southeros.getKingdom(kingdomName.toLowerCase()).getEmblem();
+                        cipherObject = new SeasarCipher(emblem.length());
 
-                    String message = line.substring(kingdomName.length() + 1);
-                    String decryptedMessage = cipherObject.decryptMessage(message);
+                        String message = line.substring(kingdomName.length() + 1);
+                        String decryptedMessage = cipherObject.decryptMessage(message);
 
-                    if (secretMessageIdentified(decryptedMessage.toLowerCase(), emblem.toLowerCase())) {
-                        allies++;
-                        successMessage += kingdomName + " ";
+                        if (secretMessageIdentified(decryptedMessage.toLowerCase(), emblem.toLowerCase())) {
+                            allies++;
+                            successMessage += kingdomName + " ";
+                        }
+
+                        if (allies >= 3) {
+                            return "SPACE " + successMessage;
+                        }
                     }
-
-                    if (allies >= 3) {
-                        return "SPACE " + successMessage;
-                    }
+                } catch (Exception ex) {
+                    System.out.println("Incorrect input.");
                 }
             }
-        } catch (Exception ex) {
-            System.out.println("Incorrect input.");
-        }
 
         return failureMessage;
     }
