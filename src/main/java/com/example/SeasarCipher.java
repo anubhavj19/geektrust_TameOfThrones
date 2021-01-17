@@ -33,7 +33,7 @@ public class SeasarCipher {
             }
             else
             {
-                char ch = (char)(((int)message.charAt(i) + key - 97) % totalAlphabets + 97);
+                char ch = (char)(((int)message.charAt(i) + key - lowerCaseA) % totalAlphabets + lowerCaseA);
                 result.append(ch);
             }
         }

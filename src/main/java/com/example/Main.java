@@ -5,12 +5,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
-
         //initializing southeros and adding kingdoms
         Southeros southeros = new Southeros();
         southeros.addKingdom("space", "gorilla");
@@ -26,8 +27,7 @@ public class Main {
 
     public static String getAllies(Southeros southeros, String filePath) throws IOException {
         //initializing allies and final output
-        int allies = 0;
-        String alliedKingdoms = "";
+        List<String> allies = new ArrayList<>();
         String failureMessage = "NONE";
 
         //Taking file path input on command line
@@ -51,12 +51,23 @@ public class Main {
                         String decryptedMessage = cipherObject.decryptMessage(message);
 
                         if (secretMessageIdentified(decryptedMessage.toLowerCase(), emblem.toLowerCase())) {
-                            allies++;
-                            alliedKingdoms += kingdomName + " ";
+                            allies.add(kingdomName);
+                            //alliedKingdoms += kingdomName + " ";
                         }
 
-                        if (allies >= 3) {
-                            return "SPACE " + alliedKingdoms;
+                        if (allies.size() >= 3) {
+                            String allyNames = "";
+
+                            for (int i = 0; i < allies.size(); i++) {
+                                if (i == 0) {
+                                    allyNames = allies.get(i).toString();
+                                }
+                                else {
+                                    allyNames = allyNames + " " + allies.get(i);
+                                }
+                            }
+
+                            return "SPACE " + allyNames;
                         }
                     }
                 } catch (Exception ex) {
