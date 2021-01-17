@@ -27,7 +27,7 @@ public class Main {
     public static String getAllies(Southeros southeros, String filePath) throws IOException {
         //initializing allies and final output
         int allies = 0;
-        String successMessage = "";
+        String alliedKingdoms = "";
         String failureMessage = "NONE";
 
         //Taking file path input on command line
@@ -52,11 +52,11 @@ public class Main {
 
                         if (secretMessageIdentified(decryptedMessage.toLowerCase(), emblem.toLowerCase())) {
                             allies++;
-                            successMessage += kingdomName + " ";
+                            alliedKingdoms += kingdomName + " ";
                         }
 
                         if (allies >= 3) {
-                            return "SPACE " + successMessage;
+                            return "SPACE " + alliedKingdoms;
                         }
                     }
                 } catch (Exception ex) {
