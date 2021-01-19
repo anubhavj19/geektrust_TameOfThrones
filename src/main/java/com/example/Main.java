@@ -21,17 +21,14 @@ public class Main {
         southeros.addKingdom("air", "owl");
         southeros.addKingdom("fire", "dragon");
 
-        System.out.println(getAllies(southeros, "/home/anubhavj19/Anubhav/geektrust/src/main/resources/test.txt"));
-        //"/home/anubhavj19/Anubhav/geektrust/src/main/resources/test.txt"
+        System.out.println(getAllies(southeros, args[0]));
+        //System.out.println(getAllies(southeros, "/home/anubhavj19/Anubhav/geektrust/src/main/resources/test.txt"));
     }
 
     public static String getAllies(Southeros southeros, String filePath) throws IOException {
         //initializing allies and final output
         List<String> allies = new ArrayList<>();
         String failureMessage = "NONE";
-
-        //Taking file path input on command line
-        //List<String> allLines = Files.readAllLines(Paths.get(args[0]));
         List<String> allLines = Files.readAllLines(Paths.get(filePath));
 
         //initializing cipher class object
@@ -52,22 +49,21 @@ public class Main {
 
                         if (secretMessageIdentified(decryptedMessage.toLowerCase(), emblem.toLowerCase())) {
                             allies.add(kingdomName);
-                            //alliedKingdoms += kingdomName + " ";
                         }
 
                         if (allies.size() >= 3) {
-                            String allyNames = "";
+                            String alliedKingdoms = "";
 
                             for (int i = 0; i < allies.size(); i++) {
                                 if (i == 0) {
-                                    allyNames = allies.get(i).toString();
+                                    alliedKingdoms = allies.get(i).toString();
                                 }
                                 else {
-                                    allyNames = allyNames + " " + allies.get(i);
+                                    alliedKingdoms += " " + allies.get(i);
                                 }
                             }
 
-                            return "SPACE " + allyNames;
+                            return "SPACE " + alliedKingdoms;
                         }
                     }
                 } catch (Exception ex) {
