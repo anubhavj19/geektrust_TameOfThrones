@@ -20,10 +20,10 @@ public class Southeros {
     }
 
     public boolean kingdomExists(String kingdomName) {
-        return(kingdoms.containsKey(kingdomName));
+        return(kingdoms.containsKey(kingdomName.toLowerCase()));
     }
 
     public Kingdom getKingdom(String kingdomName) {
-        return kingdoms.get(kingdomName);
+        return kingdoms.get(kingdomName.toLowerCase());
     }
 }
