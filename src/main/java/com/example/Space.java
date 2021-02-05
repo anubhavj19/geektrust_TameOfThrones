@@ -3,6 +3,7 @@ package com.example;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class Space {
 
@@ -27,11 +28,9 @@ public class Space {
     }
 
     public String getListOfAllies(Southeros southeros, List<String> secretMessages) {
-        //initializing cipher class object
         SeasarCipher cipherObject;
 
-
-            //looping each secret message
+        //looping each secret message
         for (String secretMessage : secretMessages) {
             String kingdomName = secretMessage.split(" ")[0];
 
@@ -44,7 +43,7 @@ public class Space {
                     String message = secretMessage.substring(kingdomName.length() + 1);
                     String decryptedMessage = cipherObject.decryptMessage(message);
 
-                    if (secretMessageIdentified(decryptedMessage.toLowerCase(), emblem.toLowerCase())) {
+                    if (secretMessageIdentified(decryptedMessage, emblem)) {
                         addAllyName(kingdomName);
                     }
 
@@ -72,7 +71,8 @@ public class Space {
     }
 
     public boolean secretMessageIdentified(String text, String emblem) {
-
+        text = text.toLowerCase();
+        emblem = emblem.toLowerCase();
         HashMap<Character, Integer> hashmap = new HashMap<>();
 
         //hashmap to store characters of emblem and their count

@@ -21,8 +21,8 @@ public class Main {
         southeros.addKingdom("air", "owl");
         southeros.addKingdom("fire", "dragon");
 
-        //List<String> secretMessages = Files.readAllLines(Paths.get(args[0]));
-        List<String> secretMessages = Files.readAllLines(Paths.get("/home/anubhavj19/Anubhav/geektrust/src/main/resources/test.txt"));
+        List<String> secretMessages = Files.readAllLines(Paths.get(args[0]));
+        //List<String> secretMessages = Files.readAllLines(Paths.get("/home/anubhavj19/Anubhav/geektrust/src/main/resources/test.txt"));
 
         Space space = new Space();
         System.out.println(space.getListOfAllies(southeros, secretMessages));

@@ -4,7 +4,7 @@ com/example/Space.java
  com.example.Space
 com/example/SeasarCipher.java
  com.example.SeasarCipher
-com/example/Main.java
- com.example.Main
 com/example/Kingdom.java
  com.example.Kingdom
+com/example/Main.java
+ com.example.Main
