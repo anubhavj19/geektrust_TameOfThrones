@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.SpaceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-02-05T14:09:14" hostname="MSI-anubhavj19" time="0.021">
+<testsuite name="com.example.SpaceTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-02-05T14:23:19" hostname="MSI-anubhavj19" time="0.017">
   <properties/>
-  <testcase name="secretMessageIdentified()" classname="com.example.SpaceTest" time="0.021"/>
+  <testcase name="WhenInputIsEmpty()" classname="com.example.SpaceTest" time="0.014"/>
+  <testcase name="secretMessageIdentified()" classname="com.example.SpaceTest" time="0.001"/>
+  <testcase name="getListOfAlliesWhenInputIsInvalid()" classname="com.example.SpaceTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
