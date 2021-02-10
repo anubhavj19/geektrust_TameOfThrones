@@ -1,5 +1,7 @@
 # geektrust_TameOfThrones
 
+Solution to Tame of Thrones Problem on Geektrust.in
+
 gradle clean - clean build <br>
 gradle build - build project <br>
 java -jar 'jar path' 'filepath' - run project <br>
